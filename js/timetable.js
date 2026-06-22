@@ -45,7 +45,7 @@ const ROUTES = {
 
   toMeiFooLaiKing: {
     id: 'toMeiFooLaiKing',
-    nameZh: '\u6C38\u5F97\u5229\u5EE3\u5834 \u2192 \u7F8E\u5B5A\u53CA\u835F\u666F\u6E2F\u9435\u7AD9',
+    nameZh: '\u6C38\u5F97\u5229\u5EE3\u5834 \u2192 \u7F8E\u5B5A\u53CA\u8358\u666F\u6E2F\u9435\u7AD9',
     nameEn: 'Ever Gain Plaza \u2192 Mei Foo & Lai King MTR',
     serviceDays: ['weekday'],
     weekday: {
