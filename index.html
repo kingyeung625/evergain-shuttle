@@ -72,8 +72,15 @@
       <p class="next-service" id="next-service"></p>
 
       <details class="timetable-accordion" id="timetable-accordion">
-        <summary>完整時間表</summary>
-        <div class="timetable-panel" id="timetable-panel"></div>
+        <summary>完整時間表<span class="timetable-summary-hint">含頻密班次時段</span></summary>
+        <div class="timetable-panel">
+          <nav class="timetable-day-tabs" role="tablist" aria-label="服務日">
+            <button type="button" class="timetable-day-tab active" data-day="weekday" role="tab" aria-selected="true">周一至五</button>
+            <button type="button" class="timetable-day-tab" data-day="saturday" role="tab" aria-selected="false">周六</button>
+            <button type="button" class="timetable-day-tab" data-day="closed" role="tab" aria-selected="false">周日及公眾假期</button>
+          </nav>
+          <div class="timetable-day-content" id="timetable-day-content"></div>
+        </div>
       </details>
     </main>
 

@@ -204,6 +204,14 @@ body {
   user-select: none;
 }
 
+.timetable-summary-hint {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 400;
+}
+
 .timetable-accordion summary::-webkit-details-marker {
   display: none;
 }
@@ -222,23 +230,61 @@ body {
   margin-top: 16px;
 }
 
-.timetable-section + .timetable-section {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px dashed var(--border);
+.timetable-day-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
-.timetable-section h3 {
-  margin: 0 0 10px;
-  font-size: 0.92rem;
+.timetable-day-tab {
+  appearance: none;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 6px;
+  background: var(--surface);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.timetable-day-tab:hover {
   color: var(--text);
+  background: var(--surface-2);
 }
 
-.timetable-note {
-  margin: 0 0 12px;
-  color: var(--warning);
+.timetable-day-tab.active {
+  background: var(--accent-soft);
+  border-color: rgba(37, 99, 235, 0.35);
+  color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.08);
+}
+
+.timetable-day-content {
+  min-height: 2rem;
+}
+
+.timetable-no-service {
+  margin: 8px 0 0;
+  padding: 20px 12px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.timetable-period-section + .timetable-period-section {
+  margin-top: 16px;
+}
+
+.timetable-period {
+  margin: 0 0 10px;
   font-size: 0.82rem;
-  line-height: 1.45;
+  color: var(--muted);
+  font-weight: 600;
 }
 
 .timetable-times {
@@ -260,10 +306,29 @@ body {
   text-align: center;
 }
 
-.timetable-empty {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.85rem;
+.timetable-peak {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  color: var(--accent);
+  text-align: left;
+}
+
+.timetable-peak-range {
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.timetable-peak-note {
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--text);
 }
 
 .footer {
@@ -286,5 +351,10 @@ body {
   .route-tab {
     font-size: 0.75rem;
     padding: 10px 6px;
+  }
+
+  .timetable-day-tab {
+    font-size: 0.68rem;
+    padding: 10px 4px;
   }
 }
