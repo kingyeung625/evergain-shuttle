@@ -1,0 +1,201 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #0f1419;
+  --surface: #1a2332;
+  --surface-2: #243044;
+  --text: #e8edf4;
+  --muted: #8b9cb3;
+  --accent: #4da3ff;
+  --accent-soft: rgba(77, 163, 255, 0.15);
+  --success: #5fd38d;
+  --warning: #f5b942;
+  --danger: #f07178;
+  --radius: 16px;
+  --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(77, 163, 255, 0.12), transparent 45%),
+    var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.container {
+  width: min(100%, 480px);
+  margin: 0 auto;
+  padding: 24px 16px 32px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin: 0 0 12px;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.clock {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.route-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.route-tab {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 12px 8px;
+  background: var(--surface);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.route-tab:hover {
+  color: var(--text);
+}
+
+.route-tab.active {
+  background: var(--accent-soft);
+  border-color: rgba(77, 163, 255, 0.45);
+  color: var(--text);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.route-name {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.status-badge {
+  display: inline-block;
+  margin: 0 0 20px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.status-badge.ok,
+.status-badge.peak {
+  background: rgba(95, 211, 141, 0.15);
+  color: var(--success);
+}
+
+.status-badge.ended,
+.status-badge.not_today {
+  background: rgba(245, 185, 66, 0.15);
+  color: var(--warning);
+}
+
+.status-badge.closed {
+  background: rgba(240, 113, 120, 0.15);
+  color: var(--danger);
+}
+
+.next-bus .label {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.next-bus .time {
+  margin: 0;
+  font-size: clamp(3rem, 14vw, 4.5rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.next-bus .time.muted {
+  font-size: 2rem;
+  color: var(--muted);
+}
+
+.countdown {
+  margin: 12px 0 0;
+  color: var(--accent);
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.detail {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.next-service {
+  margin: 8px 0 0;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.footer {
+  margin-top: 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.footer p {
+  margin: 0 0 8px;
+}
+
+.footer .meta {
+  margin-top: 12px;
+  opacity: 0.8;
+}
+
+@media (max-width: 360px) {
+  .route-tab {
+    font-size: 0.75rem;
+    padding: 10px 6px;
+  }
+}
