@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kingyeung625.github.io/evergain-shuttle/sitemap.xml
