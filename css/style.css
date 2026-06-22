@@ -5,19 +5,20 @@
 }
 
 :root {
-  color-scheme: dark;
-  --bg: #0f1419;
-  --surface: #1a2332;
-  --surface-2: #243044;
-  --text: #e8edf4;
-  --muted: #8b9cb3;
-  --accent: #4da3ff;
-  --accent-soft: rgba(77, 163, 255, 0.15);
-  --success: #5fd38d;
-  --warning: #f5b942;
-  --danger: #f07178;
+  color-scheme: light;
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --surface-2: #eef3f9;
+  --text: #1f2937;
+  --muted: #64748b;
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.1);
+  --success: #15803d;
+  --warning: #b45309;
+  --danger: #b91c1c;
+  --border: rgba(15, 23, 42, 0.08);
   --radius: 16px;
-  --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
 }
 
 html,
@@ -29,7 +30,7 @@ body {
 body {
   font-family: "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
   background:
-    radial-gradient(circle at top, rgba(77, 163, 255, 0.12), transparent 45%),
+    radial-gradient(circle at top, rgba(37, 99, 235, 0.08), transparent 45%),
     var(--bg);
   color: var(--text);
   line-height: 1.5;
@@ -76,7 +77,7 @@ body {
 
 .route-tab {
   appearance: none;
-  border: 1px solid transparent;
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 12px 8px;
   background: var(--surface);
@@ -84,22 +85,24 @@ body {
   font: inherit;
   font-size: 0.82rem;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 
 .route-tab:hover {
   color: var(--text);
+  background: var(--surface-2);
 }
 
 .route-tab.active {
   background: var(--accent-soft);
-  border-color: rgba(77, 163, 255, 0.45);
-  color: var(--text);
+  border-color: rgba(37, 99, 235, 0.35);
+  color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.08);
 }
 
 .card {
   background: var(--surface);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 24px 20px;
@@ -123,18 +126,18 @@ body {
 
 .status-badge.ok,
 .status-badge.peak {
-  background: rgba(95, 211, 141, 0.15);
+  background: rgba(21, 128, 61, 0.1);
   color: var(--success);
 }
 
 .status-badge.ended,
 .status-badge.not_today {
-  background: rgba(245, 185, 66, 0.15);
+  background: rgba(180, 83, 9, 0.1);
   color: var(--warning);
 }
 
 .status-badge.closed {
-  background: rgba(240, 113, 120, 0.15);
+  background: rgba(185, 28, 28, 0.1);
   color: var(--danger);
 }
 
@@ -151,6 +154,7 @@ body {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
   line-height: 1.1;
+  color: var(--text);
 }
 
 .next-bus .time.muted {
@@ -190,7 +194,7 @@ body {
 
 .footer .meta {
   margin-top: 12px;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 @media (max-width: 360px) {

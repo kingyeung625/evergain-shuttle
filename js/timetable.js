@@ -6,7 +6,7 @@
 const ROUTES = {
   kwaiFong: {
     id: 'kwaiFong',
-    nameZh: '\u8475\u82AD\u6E2F\u9435\u7AD9 \u2194 \u6C38\u5F97\u5229\u5EE3\u5834',
+    nameZh: '\u8475\u82B3\u6E2F\u9435\u7AD9 \u2194 \u6C38\u5F97\u5229\u5EE3\u5834',
     nameEn: 'Kwai Fong MTR \u2194 Ever Gain Plaza',
     serviceDays: ['weekday', 'saturday'],
     weekday: {
