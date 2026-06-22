@@ -162,6 +162,13 @@ body {
   color: var(--muted);
 }
 
+.next-bus .time.peak-message {
+  font-size: clamp(1.25rem, 5.5vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
 .countdown {
   margin: 12px 0 0;
   color: var(--accent);
@@ -179,6 +186,84 @@ body {
   margin: 8px 0 0;
   color: var(--text);
   font-size: 0.9rem;
+}
+
+.timetable-accordion {
+  margin-top: 24px;
+  text-align: left;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.timetable-accordion summary {
+  list-style: none;
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: 600;
+  user-select: none;
+}
+
+.timetable-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.timetable-accordion summary::after {
+  content: "▾";
+  float: right;
+  transition: transform 0.15s ease;
+}
+
+.timetable-accordion[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.timetable-panel {
+  margin-top: 16px;
+}
+
+.timetable-section + .timetable-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--border);
+}
+
+.timetable-section h3 {
+  margin: 0 0 10px;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.timetable-note {
+  margin: 0 0 12px;
+  color: var(--warning);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.timetable-times {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(4.5rem, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timetable-times li {
+  padding: 8px 6px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.timetable-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 
 .footer {
