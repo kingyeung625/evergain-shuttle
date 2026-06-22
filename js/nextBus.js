@@ -220,6 +220,16 @@ function getNextBus(routeId, now = new Date()) {
     }
 
     const secondsUntil = getSecondsUntil(nextPeakTime, hkt);
+    if (routeId === 'kwaiFong') {
+      return {
+        status: 'peak',
+        nextTime: null,
+        secondsUntil: null,
+        isPeak: true,
+        message: '\u4E0D\u5B9A\u6642\u958B\u8ECA\uFF0C\u7D04 5 \u5206\u9418\u4E00\u73ED',
+      };
+    }
+
     return {
       status: 'peak',
       nextTime: nextPeakTime,
