@@ -408,6 +408,19 @@ body {
   font-size: 0.95rem;
 }
 
+.stop-line {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.stop-line span {
+  flex: 0 0 auto;
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
 .summary-card p,
 .faq-item p {
   margin: 0 0 4px;
