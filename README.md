@@ -35,7 +35,7 @@ git push -u origin main
 3. In the repo: **Settings** → **Pages**
 4. Source: **Deploy from a branch**
 5. Branch: `main`, folder: `/ (root)`
-6. After 1-2 minutes, visit the Pages URL. This site is published at `https://lo-code.com/`
+6. After 1-2 minutes, visit the Pages URL. This site is published at `https://lo-code.com/evergain-shuttle/`
 
 ## Project structure
 
