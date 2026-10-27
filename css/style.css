@@ -393,6 +393,12 @@ body {
   font-size: 1.05rem;
 }
 
+.summary-note {
+  margin: -4px 0 12px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
 .summary-card,
 .faq-item {
   margin: 0 0 10px;
@@ -408,14 +414,9 @@ body {
   font-size: 0.95rem;
 }
 
-.stop-line {
-  display: flex;
-  gap: 8px;
-  align-items: baseline;
-}
-
 .stop-line span {
-  flex: 0 0 auto;
+  display: block;
+  margin-bottom: 2px;
   color: var(--text);
   font-size: 0.78rem;
   font-weight: 600;
