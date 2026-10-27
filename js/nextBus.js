@@ -9,12 +9,6 @@ function parseTimeToMinutes(timeStr) {
   return hours * 60 + minutes;
 }
 
-function formatMinutesToTime(totalMinutes) {
-  const hours = Math.floor(totalMinutes / 60) % 24;
-  const minutes = totalMinutes % 60;
-  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
-}
-
 function getHKTParts(date = new Date()) {
   const formatter = new Intl.DateTimeFormat('en-GB', {
     timeZone: HKT_TIMEZONE,
@@ -86,11 +80,18 @@ function isInPeakPeriod(hkt, peakPeriods) {
   return null;
 }
 
-function getNextPeakDeparture(hkt, intervalMinutes) {
-  const intervalSeconds = intervalMinutes * 60;
-  const nextSlotSeconds = Math.ceil((hkt.totalSeconds + 1) / intervalSeconds) * intervalSeconds;
-  const nextMinutes = Math.floor(nextSlotSeconds / 60);
-  return formatMinutesToTime(nextMinutes);
+function getUpcomingPeakPeriod(hkt, peakPeriods) {
+  if (!peakPeriods) {
+    return null;
+  }
+
+  const now = hkt.totalMinutes;
+  for (const period of peakPeriods) {
+    if (parseTimeToMinutes(period.start) > now) {
+      return period;
+    }
+  }
+  return null;
 }
 
 function getNextFixedDeparture(hkt, fixedTimes) {
@@ -202,44 +203,31 @@ function getNextBus(routeId, now = new Date()) {
   const peakPeriod = isInPeakPeriod(hkt, schedule.peakPeriods);
 
   if (peakPeriod) {
-    const nextPeakTime = getNextPeakDeparture(hkt, peakPeriod.intervalMinutes);
-    const nextFixedTime = getNextFixedDeparture(hkt, schedule.fixedTimes);
-
-    if (
-      nextFixedTime
-      && parseTimeToMinutes(nextFixedTime) <= parseTimeToMinutes(nextPeakTime)
-    ) {
-      const secondsUntil = getSecondsUntil(nextFixedTime, hkt);
-      return {
-        status: 'ok',
-        nextTime: nextFixedTime,
-        secondsUntil,
-        isPeak: false,
-        message: '\u56FA\u5B9A\u73ED\u6B21',
-      };
-    }
-
-    const secondsUntil = getSecondsUntil(nextPeakTime, hkt);
-    if (routeId === 'kwaiFong') {
-      return {
-        status: 'peak',
-        nextTime: null,
-        secondsUntil: null,
-        isPeak: true,
-        message: '\u4E0D\u5B9A\u6642\u958B\u8ECA\uFF0C\u7D04 5 \u5206\u9418\u4E00\u73ED',
-      };
-    }
-
     return {
       status: 'peak',
-      nextTime: nextPeakTime,
-      secondsUntil,
+      nextTime: null,
+      secondsUntil: null,
       isPeak: true,
-      message: `\u7E41\u5FD9\u6642\u6BB5\uFF0C\u7D04\u6BCF ${peakPeriod.intervalMinutes} \u5206\u9418\u4E00\u73ED`,
+      message: `\u4E0D\u5B9A\u6642\u958B\u8ECA\uFF0C\u7D04 ${peakPeriod.intervalMinutes} \u5206\u9418\u4E00\u73ED`,
     };
   }
 
   const nextTime = getNextFixedDeparture(hkt, schedule.fixedTimes);
+  const upcomingPeak = getUpcomingPeakPeriod(hkt, schedule.peakPeriods);
+  if (upcomingPeak) {
+    const peakStartMinutes = parseTimeToMinutes(upcomingPeak.start);
+    const fixedMinutes = nextTime ? parseTimeToMinutes(nextTime) : Infinity;
+    if (peakStartMinutes < fixedMinutes) {
+      return {
+        status: 'ok',
+        nextTime: upcomingPeak.start,
+        secondsUntil: getSecondsUntil(upcomingPeak.start, hkt),
+        isPeak: false,
+        message: `${upcomingPeak.start} \u8D77\u4E0D\u5B9A\u6642\u958B\u8ECA\uFF0C\u7D04 ${upcomingPeak.intervalMinutes} \u5206\u9418\u4E00\u73ED`,
+      };
+    }
+  }
+
   if (nextTime) {
     const secondsUntil = getSecondsUntil(nextTime, hkt);
     return {
@@ -266,8 +254,12 @@ function formatCountdown(secondsUntil) {
   if (secondsUntil == null) {
     return '';
   }
-  const mins = Math.floor(secondsUntil / 60);
+  const hours = Math.floor(secondsUntil / 3600);
+  const mins = Math.floor((secondsUntil % 3600) / 60);
   const secs = secondsUntil % 60;
+  if (hours > 0) {
+    return `\u9084\u6709 ${hours} \u5C0F\u6642 ${mins} \u5206 ${secs} \u79D2`;
+  }
   if (mins > 0) {
     return `\u9084\u6709 ${mins} \u5206 ${secs} \u79D2`;
   }
