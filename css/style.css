@@ -6,19 +6,46 @@
 
 :root {
   color-scheme: light;
-  --bg: #f4f7fb;
-  --surface: #ffffff;
-  --surface-2: #eef3f9;
-  --text: #1f2937;
-  --muted: #64748b;
-  --accent: #2563eb;
-  --accent-soft: rgba(37, 99, 235, 0.1);
-  --success: #15803d;
-  --warning: #b45309;
-  --danger: #b91c1c;
-  --border: rgba(15, 23, 42, 0.08);
+  --bg: #efeae2;
+  --bg-shade: #e4ddd2;
+  --surface: #f7f4ef;
+  --surface-2: #e7e0d6;
+  --text: #241f1a;
+  --muted: #6d665d;
+  --button: #243126;
+  --button-hover: #1a261c;
+  --button-text: #f6f3ec;
+  --accent: var(--button);
+  --accent-soft: rgba(36, 49, 38, 0.1);
+  --ring: #c4552a;
+  --success: #2d6a4f;
+  --warning: #9a5416;
+  --danger: #9b3a32;
+  --border: rgba(36, 31, 26, 0.12);
   --radius: 16px;
-  --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow: 0 16px 40px rgba(36, 31, 26, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #121411;
+    --bg-shade: #1c1f1a;
+    --surface: #1a1d18;
+    --surface-2: #242820;
+    --text: #f3efe6;
+    --muted: #b7b1a6;
+    --button: #e7e1d6;
+    --button-hover: #f6f3ec;
+    --button-text: #1a1c17;
+    --accent-soft: rgba(231, 225, 214, 0.12);
+    --ring: #e8a07a;
+    --success: #8fbf9a;
+    --warning: #e0b07a;
+    --danger: #e08a84;
+    --border: rgba(243, 239, 230, 0.12);
+    --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  }
 }
 
 html,
@@ -28,9 +55,9 @@ body {
 }
 
 body {
-  font-family: "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", "Heiti TC", "WenQuanYi Micro Hei", sans-serif;
   background:
-    radial-gradient(circle at top, rgba(37, 99, 235, 0.08), transparent 45%),
+    radial-gradient(1200px 600px at 50% -10%, var(--bg-shade), transparent 60%),
     var(--bg);
   color: var(--text);
   line-height: 1.5;
@@ -48,11 +75,11 @@ body {
 }
 
 .eyebrow {
-  margin: 0 0 8px;
-  color: var(--accent);
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
 }
 
 .header h1 {
@@ -86,14 +113,15 @@ body {
 .route-tab {
   appearance: none;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 12px 8px;
   background: var(--surface);
   color: var(--muted);
   font: inherit;
   font-size: 0.82rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
 }
 
 .route-tab:hover {
@@ -102,10 +130,22 @@ body {
 }
 
 .route-tab.active {
-  background: var(--accent-soft);
-  border-color: rgba(37, 99, 235, 0.35);
-  color: var(--accent);
-  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.08);
+  background: var(--button);
+  border-color: transparent;
+  color: var(--button-text);
+  box-shadow: var(--shadow);
+}
+
+.route-tab.active:hover {
+  background: var(--button-hover);
+  color: var(--button-text);
+}
+
+.route-tab:focus-visible,
+.timetable-day-tab:focus-visible,
+.timetable-accordion summary:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 3px;
 }
 
 .card {
@@ -179,8 +219,9 @@ body {
 
 .countdown {
   margin: 12px 0 0;
-  color: var(--accent);
+  color: var(--ring);
   font-size: 1.1rem;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
@@ -248,14 +289,15 @@ body {
 .timetable-day-tab {
   appearance: none;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 10px 6px;
   background: var(--surface);
   color: var(--muted);
   font: inherit;
   font-size: 0.75rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
 }
 
 .timetable-day-tab:hover {
@@ -263,11 +305,11 @@ body {
   background: var(--surface-2);
 }
 
-.timetable-day-tab.active {
-  background: var(--accent-soft);
-  border-color: rgba(37, 99, 235, 0.35);
-  color: var(--accent);
-  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.08);
+.timetable-day-tab.active,
+.timetable-day-tab.active:hover {
+  background: var(--button);
+  border-color: transparent;
+  color: var(--button-text);
 }
 
 .timetable-day-content {
@@ -320,10 +362,10 @@ body {
   flex-direction: column;
   gap: 4px;
   padding: 12px 14px;
-  border-radius: 12px;
+  border-radius: 16px;
   background: var(--accent-soft);
-  border: 1px solid rgba(37, 99, 235, 0.2);
-  color: var(--accent);
+  border: 1px solid var(--border);
+  color: var(--text);
   text-align: left;
 }
 
@@ -357,7 +399,7 @@ body {
   padding: 14px 16px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 16px;
 }
 
 .summary-card h3,
